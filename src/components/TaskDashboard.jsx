@@ -25,6 +25,7 @@ export default function TaskDashboard() {
   const [tasks, setTasks]     = useState([
     { id: 1, title: "Faire les courses",  description: "Acheter du pain et du lait",             priority: "low",  done: false },
     { id: 2, title: "Laver la voiture",   description: "Laver la voiture au retour de vacances",  priority: "high", done: false },
+    { id: 3, title: "Faire les devis clients",   description: "Lorem ipsum dolor sit amet.",  priority: "medium", done: false },
   ]);
   const [filter, setFilter]   = useState("all");
   const [sort, setSort]       = useState(false);
