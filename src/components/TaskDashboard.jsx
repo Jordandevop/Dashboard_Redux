@@ -48,20 +48,20 @@ export default function TaskDashboard() {
     setTasks([...tasks, newTask]);
   };
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validate()) return;
     addTask();
-    alert(`Titre : ${formData.title}
-Description : ${formData.description}
-Priorité : ${getPriorityLabel(formData.priority)}
-Statut : ${formData.done ? "Terminée" : "En cours"}`);
-    setFormData({ title: "", description: "", priority: "", done: false });
   };
 
   const handleToggle = (id) => {
     setTasks(toggleTask(tasks, id));
   };
+
+  const handleDelete = (id) => {
+  setTasks((prevTasks) => prevTasks.filter((t) => t.id !== id));
+};
 
   const total     = tasks.length;
   const terminees = tasks.filter((t) => t.done).length;
@@ -152,6 +152,7 @@ Statut : ${formData.done ? "Terminée" : "En cours"}`);
                 tasks={displayedTasks}
                 getPriorityLabel={getPriorityLabel}
                 onToggle={handleToggle}
+                onDelete={handleDelete}
               />
             </Card.Body>
           </Card>
