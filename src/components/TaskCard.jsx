@@ -1,4 +1,6 @@
 import { Badge } from 'react-bootstrap'
+import { useDispatch} from 'react-redux'
+import { deleteTask, toggleItemTask } from '../features/tasksSlice'
 
 const getPriorityBadge = (priority) => {
     if (priority === "high")   return "danger"
@@ -6,14 +8,26 @@ const getPriorityBadge = (priority) => {
     return "success"
 }
 
-export default function TaskCard({ task, getPriorityLabel, onToggle, onDelete }) {
+const priorityOptions = [
+    { value: "low",    label: "Basse" },
+    { value: "medium", label: "Moyenne" },
+    { value: "high",   label: "Haute" },
+]
+
+const getPriorityLabel = (priority) =>
+    priorityOptions.find((o) => o.value === priority)?.label ?? "Non définie"
+
+export default function TaskCard({ task }) {
+const dispatch = useDispatch()
+
+
     return (
         <div className='border rounded p-3 mb-2'>
             <div className='d-flex align-items-center gap-2 mb-2'>
                 <input
                     type='checkbox'
                     checked={task.done}
-                    onChange={() => onToggle(task.id)} 
+                    onChange={() => dispatch(toggleItemTask(task.id))}
                 />
                 <strong>{task.title}</strong>
             </div>
@@ -29,7 +43,7 @@ export default function TaskCard({ task, getPriorityLabel, onToggle, onDelete })
                 </div>
                 <button
                     className='btn btn-sm btn-outline-danger'
-                    onClick={() => onDelete(task.id)}
+                    onClick={() => dispatch(deleteTask(task.id))}
                 >
                     Supprimer
                 </button>
