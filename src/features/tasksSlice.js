@@ -1,11 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState ={
-    tasks: [],
+    tasks: [{
+        title: "Devis Client",
+        description: "Mettre à jour les devis clients.",
+        priority:'medium',
+        done: false
+    }],
     filter: "all",
     priorityFilter:"all",
     search: "",      
     sort: false,
+    error:null,
 }
 
 const taskSlice = createSlice({
@@ -48,9 +54,12 @@ const taskSlice = createSlice({
         toggleSort: (state) => {
             state.sort = !state.sort
         },
+        setError: (state, action)=>{
+            state.error = action.payload
+        }
     },
 })
 
-export const { addTask, deleteTask, toggleItemTask, setFilter, setPriorityFilter, setSearch,toggleSort} = taskSlice.actions
+export const { addTask, deleteTask, toggleItemTask, setFilter, setPriorityFilter, setSearch,toggleSort, setError} = taskSlice.actions
 
 export default taskSlice.reducer

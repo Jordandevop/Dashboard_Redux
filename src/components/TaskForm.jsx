@@ -5,7 +5,7 @@ import TaskSelect from "./TaskSelect";
 import TaskCheckbox from "./TaskCheckbox";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { addTask } from "../features/tasksSlice";
+import { addTask, setError } from "../features/tasksSlice";
 
 const priorityOptions = [
   { value: "low", label: "Basse" },
@@ -31,23 +31,21 @@ export default function TaskForm() {
     return !newErrors.title && !newErrors.description
 }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!validate()) return;
-    dispatch(
-      addTask({
-        id: Date.now(),
-        ...formData,
-      }),
-    );
-    setFormData({ title: "", description: "", priority: "low", done: false });
-  };
+const handleSubmit = (e) => {
+    e.preventDefault()
+    if (!validate()) {
+        return
+    }
+    dispatch(addTask({ id: Date.now(), ...formData }))
+    setFormData({ title: "", description: "", priority: "low", done: false })
+}
   
 
 const handleChange = (e) => {
     const { name, value, type, checked } = e.target
     setFormData({ ...formData, [name]: type === "checkbox" ? checked : value })
 }
+
   return (
     <Form onSubmit={handleSubmit}>
       <TaskInput

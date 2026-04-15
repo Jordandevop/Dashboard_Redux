@@ -3,8 +3,19 @@ import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
 import TaskStats from "./TaskStats";
 import TaskFilter from "./TaskFilter";
+import { useEffect, useState } from "react";
+import LoadingSpinner from "./LoadingSpinner";
+import ErrorMessage from "./ErrorMessage";
 
 export default function TaskDashboard() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) return <LoadingSpinner message="Chargement des tâches..." />;
 
   return (
     <>
@@ -14,13 +25,13 @@ export default function TaskDashboard() {
       </div>
 
       <TaskStats />
-
+      <ErrorMessage />
       <Row className="g-4">
         <Col lg={4}>
           <Card className="shadow-sm border-0">
             <Card.Body>
               <Card.Title className="mb-4">Nouvelle tâche</Card.Title>
-              <TaskForm/>
+              <TaskForm />
             </Card.Body>
           </Card>
         </Col>
@@ -28,7 +39,7 @@ export default function TaskDashboard() {
           <Card className="shadow-sm border-0">
             <Card.Body>
               <TaskFilter />
-              <TaskList/>
+              <TaskList />
             </Card.Body>
           </Card>
         </Col>
