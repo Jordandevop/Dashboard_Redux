@@ -5,7 +5,7 @@ import TaskSelect from "./TaskSelect";
 import TaskCheckbox from "./TaskCheckbox";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { addTask, setError } from "../features/tasksSlice";
+import { addTask} from "../features/tasksSlice";
 
 const priorityOptions = [
   { value: "low", label: "Basse" },

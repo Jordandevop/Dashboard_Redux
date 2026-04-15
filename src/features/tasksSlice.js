@@ -51,8 +51,8 @@ const taskSlice = createSlice({
         setSearch: (state, action) => {
             state.search = action.payload
         },
-        toggleSort: (state) => {
-            state.sort = !state.sort
+        setSort: (state, action) => {
+            state.sort = action.payload
         },
         setError: (state, action)=>{
             state.error = action.payload
@@ -60,6 +60,6 @@ const taskSlice = createSlice({
     },
 })
 
-export const { addTask, deleteTask, toggleItemTask, setFilter, setPriorityFilter, setSearch,toggleSort, setError} = taskSlice.actions
+export const { addTask, deleteTask, toggleItemTask, setFilter, setPriorityFilter, setSearch,setSort, setError} = taskSlice.actions
 
 export default taskSlice.reducer

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setFilter, setPriorityFilter, setSearch, toggleSort } from "../features/tasksSlice";
+import { setFilter, setPriorityFilter, setSearch, setSort} from "../features/tasksSlice";
 
 function TaskFilter() {
   const dispatch = useDispatch();
@@ -10,6 +10,17 @@ function TaskFilter() {
 
   return (
     <div className="d-flex gap-2 mb-3">
+        <button
+    className="btn btn-outline-secondary"
+    onClick={() => {
+        dispatch(setFilter("all"))
+        dispatch(setPriorityFilter("all"))
+        dispatch(setSearch(""))
+       dispatch(setSort(false))
+    }}
+>
+    Tous
+</button>
       <input
         type="text"
         className="form-control"
@@ -38,7 +49,7 @@ function TaskFilter() {
       </select>
       <button
         className={`btn ${sort ? "btn-dark" : "btn-outline-dark"}`}
-        onClick={() => dispatch(toggleSort())}
+        onClick={() => dispatch(setSort(!sort))}
       >
         Priorité
       </button>
